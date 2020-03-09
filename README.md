@@ -1,5 +1,5 @@
 # Teste
-Desenvolvimento de aplicativo híbrido com Angular e Ionic.
+Desenvolvimento de um aplicativo híbrido com Angular e Ionic.
 
 ## Descrição
 
