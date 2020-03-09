@@ -1,6 +1,3 @@
-# Teste
-Desenvolvimento de um aplicativo híbrido com Angular e Ionic.
-
 ## Descrição
 
 Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplicativo deve funcionar no Navegador, Android e IOS. Contém os seguintes requisitos:
