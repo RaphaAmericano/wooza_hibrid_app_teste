@@ -45,7 +45,7 @@ Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplica
 ## Entregáveis 
 
 - Após finalizar o teste, disponibilize-o em um repositório git público ou forneça-nos permissão.
-- Junto ao projeto inclua um arquivo .apk para o Android.
+- Junto ao projeto inclua um arquivo .apk para o Android. O apk, pode ser versão debug, não é necessário a assinatura.
 - Devido a complexidade, não é necessário arquivos ou versões IOS.
 - O importante não é se tudo está ao pé da letra, mas se consegue fazer e outras pessoas conseguem compreender o código :)
 
