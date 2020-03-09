@@ -24,6 +24,7 @@ Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplica
 - Deve-se utilizar um componente do ionic native, para verificar se existe ou não conexão com a internet.
 - Folha de estilo pode ser: .sass ou .scss
 - Utilize qualquer versão igual ou superior para: Ionic 4 ou +; Angular 5 ou +;
+- O arquivo "usuarios.json", está contido neste repositório, basta baixá-lo e utilizá-lo no seu projeto.
 - Você é livre para melhorias e inclusão de novas funcionalidades, mas lembre-se: "Feito é melhor que perfeito!".
 - Organize bem seus módulos e componentes, sempre pensando no conceito de lazy load.
 - Organize suas branches e commits no git.
