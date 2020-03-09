@@ -3,7 +3,7 @@
 Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplicativo deve funcionar no Navegador, Android e IOS. Contém os seguintes requisitos:
 
 ### Login
-- Criar uma tela de login, para acesso via email/senha. Armazenar os dados no storage para que o usuário possa navegar no app sem necessidade de nova autenticação.
+- Criar uma tela de login para acesso via email/senha.
 - Ler o arquivo "usuarios.json", para validar se o email/senha informados estão corretos.
 - Salvar no storage o usuário atualmente logado.
 
@@ -20,12 +20,13 @@ Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplica
 - Criar uma tela que exiba todos os dados do usuário selecionado. Esta tela pode ser chamada pela home (exibindo o perfil do usuário autenticado) ou pela listagem de usuário.
 
 ### Outras informações
-- Deve-se utilizar o component do ionic native para verificar se existe ou não conexão com a internet.
+- Ao abrir o aplicativo, se o usuário estiver autenticado, deve-se redirecioná-lo para a home, caso contrário para a tela de login.
+- Deve-se utilizar um componente do ionic native, para verificar se existe ou não conexão com a internet.
 - Folha de estilo pode ser: .sass ou .scss
-- Fique a vontade para melhorias e inclusão de funcionalidades.
+- Você é livre para melhorias e inclusão de novas funcionalidades, mas lembre-se: "Feito é melhor que perfeito!".
 - Organize bem seus módulos e componentes, sempre pensando no conceito de lazy load.
 - Organize suas branches e commits no git.
-- Caso tenha dúvidas ou encontre alguma falha, fique a vontade para entrar em contato e ou corrigir.
+- Caso tenha dúvida ou encontre alguma falha, fique à vontade para entrar em contato e ou corrigir.
 
 
 ## Tecnologia(s) obrigatória(s)
