@@ -10,7 +10,7 @@ Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplica
 ### Home
 - Criar uma tela que será a página inicial do aplicativo. Após o login, deve-se redirecior para a home. 
 - Se usuário Android ou IOS, deve-se verificar se o usuário está com ou sem internet, e exibir um alerta caso esteja offline.
-- A home deve conter botões de ação para as seguintes funcionalidades: deslogar, acessar perfil (usuário autenticado), listar usuarios.
+- A home deve conter botões de ação para as seguintes funcionalidades: deslogar, acessar perfil (usuário autenticado) e listar usuarios.
 
 ### Lista de usuários
 - Criar uma tela que liste todos os usuários contidos no arquivo "usuarios.json".
@@ -23,6 +23,7 @@ Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplica
 - Ao abrir o aplicativo, se o usuário estiver autenticado, deve-se redirecioná-lo para a home, caso contrário para a tela de login.
 - Deve-se utilizar um componente do ionic native, para verificar se existe ou não conexão com a internet.
 - Folha de estilo pode ser: .sass ou .scss
+- Utilize qualquer versão igual ou superior para: Ionic 4 ou +; Angular 5 ou +;
 - Você é livre para melhorias e inclusão de novas funcionalidades, mas lembre-se: "Feito é melhor que perfeito!".
 - Organize bem seus módulos e componentes, sempre pensando no conceito de lazy load.
 - Organize suas branches e commits no git.
@@ -42,8 +43,8 @@ Desenvolver um aplicativo para autenticar, exibir e detalhar usuários. O aplica
 
 ## Entregáveis 
 
-- Após finalizar o teste, disponibilize-o em um repositório git público.
-- Junto ao projeto inclua um arquivo .apk para o Android
+- Após finalizar o teste, disponibilize-o em um repositório git público ou forneça-nos permissão.
+- Junto ao projeto inclua um arquivo .apk para o Android.
 - Devido a complexidade, não é necessário arquivos ou versões IOS.
 - O importante não é se tudo está ao pé da letra, mas se consegue fazer e outras pessoas conseguem compreender o código :)
 
