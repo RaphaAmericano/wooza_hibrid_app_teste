@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      Login
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,9 +9,24 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <form [formGroup]="loginForm" > 
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="stacked"><ion-icon name="mail-outline"></ion-icon>Email</ion-label>
+        <ion-input formControlName="email" type="text" ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked"><ion-icon name="key-outline"></ion-icon>Password</ion-label>
+        <ion-input formControlName="password" required type="password"></ion-input>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submitLogin()">Login</ion-button>
+      </div>
+    </ion-list>
+  </form>
+  
 </ion-content>

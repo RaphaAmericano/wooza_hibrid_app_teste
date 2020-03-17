@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-
+  public about_text:string = 'Esse é um aplicativo desenvolvido para o teste da Wooza, com Ionic e Angular'
   constructor() {}
 
 }
