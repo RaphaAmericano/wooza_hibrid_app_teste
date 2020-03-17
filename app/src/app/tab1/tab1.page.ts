@@ -16,7 +16,12 @@ export class Tab1Page implements OnInit {
   constructor(private authService: AuthService) {}
 
   public submitLogin(){
-    console.log(this.loginForm);
+    if(this.authService.authenticate(this.loginForm)){
+      console.log('submit sucesso');
+      //mensagem de retorno e router
+    } else {
+      //mensagem de retorno e limpar o formulario
+    }
   }
 
   ngOnInit(){
