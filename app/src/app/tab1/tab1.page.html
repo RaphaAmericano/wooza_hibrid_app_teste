@@ -13,7 +13,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <form [formGroup]="loginForm" > 
+  <form [formGroup]="loginForm"> 
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="stacked"><ion-icon name="mail-outline"></ion-icon>Email</ion-label>
@@ -24,7 +24,7 @@
         <ion-input formControlName="password" required type="password"></ion-input>
       </ion-item>
       <div class="ion-padding">
-        <ion-button expand="block" type="submit" class="ion-no-margin" (click)="submitLogin()">Login</ion-button>
+        <ion-button [disabled]="!loginForm.valid" expand="block" type="submit" class="ion-no-margin" (click)="submitLogin()">Login</ion-button>
       </div>
     </ion-list>
   </form>

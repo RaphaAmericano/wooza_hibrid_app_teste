@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../services/auth-service.service';
+import { User } from '../models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -7,8 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListComponent implements OnInit {
 
-  constructor() { }
+  public user: User;
 
-  ngOnInit() {}
+  constructor(
+    private auth:AuthService, 
+    private router: Router) { }
+
+  ngOnInit() {
+    this.auth.getUser().subscribe(
+      (res) => {
+        this.user = res;
+        console.log(this.user);
+    })
+  }
+
+  public logout(){
+    console.log('logout');
+    this.auth.clearStorageUser();
+    this.router.navigate(['/']);
+  }
 
 }

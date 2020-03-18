@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import * as DATABASE from '../assets/usuarios.json';
 import { FormGroup } from '@angular/forms';
 import { Plugins } from '@capacitor/core';
+import { User } from '../models/user';
+import { Platform } from '@ionic/angular';
 
 const { Storage } = Plugins;
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private db_url:string = "assets/usuarios.json";
-  private database = DATABASE.usuarios;
 
-  constructor(private http: HttpClient) {}
+  private database = DATABASE.usuarios;
+  public usuario: BehaviorSubject<User> = new BehaviorSubject(null);
+
+  constructor(private http: HttpClient, private platform: Platform) {
+    this.platform.ready().then(
+      () => {
+        this.getStorageUser()
+      }
+    )
+  }
+
+  public getUser() {
+    return this.usuario;
+  }
 
   public getDb() {
     return this.database;
@@ -24,15 +37,20 @@ export class AuthService {
     let password = form.get('password').value;
     
     for(let i = 0; i < this.database.length; i++ ){
-      if(this.database[i].email == email ){
-        if(this.database[i].senha == password){
+      if(this.database[i].email === email ){
+        if(this.database[i].senha === password){
           console.log('storage');
           this.storageUser(email, password);
+          let user = new User();
+          user.cpf = this.database[i].cpf;
+          user.dataNascimento = this.database[i].dataNascimento;
+          user.email = this.database[i].email;
+          user.nome = this.database[i].nome;
+          this.usuario.next(user);
           return true;
         } 
       }
     }
-    
     return false;
   }
 
@@ -43,28 +61,37 @@ export class AuthService {
     })
   }
 
-  public async checkUser() {
-    const res = await Storage.get({key: 'user' });
-    console.log(res);
-    if(res){
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-
-  private async getStorageUser(email){
+  private async getStorageUser(){
     const res = await Storage.get({ key: 'user' });
-    const user = JSON.parse(res.value);
+    const storage = Object.assign(new User ,JSON.parse(res.value)) ;
+
+    for(let i = 0; i < this.database.length; i++){
+      if(storage.email === this.database[i].email){
+        if(storage.senha === this.database[i].senha){
+          let user = new User();
+          user.cpf = this.database[i].cpf;
+          user.dataNascimento = this.database[i].dataNascimento;
+          user.email = this.database[i].email;
+          user.nome = this.database[i].nome;
+          this.usuario.next(user);
+        }
+      }
+    }
+
   }
 
-  private async removeStorageUser(email){
-    await Storage.remove({ key: email })
+  private async removeStorageUser(){
+    this.usuario = undefined;
+    await Storage.remove({ key: 'user' })
   }
 
-  private async clearStorageUser(){
+  public async clearStorageUser(){
+    this.usuario.next(null);
     await Storage.clear();
+  }
+
+  public getAuthUserObserver(): Observable<User> {
+    return this.usuario.asObservable();
   }
 
 }

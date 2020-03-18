@@ -4,14 +4,12 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 
-
-
 @NgModule({
   declarations: [ProfileComponent],
   imports: [
     IonicModule,
     CommonModule,
-    RouterModule.forChild([{path: '', component:ProfileComponent}])
+    RouterModule.forChild([{path: '', component:ProfileComponent }])
   ]
 })
 export class ProfileModule { }

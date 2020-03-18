@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home.component';
+import { LoginGuard } from '../services/login.guard';
 
 const routes: Routes = [
   {
@@ -24,13 +25,13 @@ const routes: Routes = [
             loadChildren: () => import('../list/list.module').then(m => m.ListModule)
           }
         ]
+      },
+      {
+        path: '',
+        redirectTo: '/home/profile',
+        pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: '/profile',
-    pathMatch: 'full'
   }
 ]
 

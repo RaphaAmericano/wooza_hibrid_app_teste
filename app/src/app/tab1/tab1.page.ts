@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab1',
@@ -10,23 +11,40 @@ import { Router } from '@angular/router';
 })
 export class Tab1Page implements OnInit {
   public loginForm:FormGroup = new FormGroup({
-    email: new FormControl(null,[Validators.required, Validators.minLength(3)]),
-    password: new FormControl(null, [Validators.required, Validators.email])
+    email: new FormControl(null,[Validators.required, Validators.email]),
+    password: new FormControl(null, [Validators.required,  Validators.minLength(3)])
   });
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService, 
+    private router: Router,
+    public alertController: AlertController) {}
 
   public submitLogin(){
-    if(this.authService.authenticate(this.loginForm)){
-      console.log('submit sucesso');
-      //mensagem de retorno e router
-    } else {
-      //mensagem de retorno e limpar o formulario
+    if(this.loginForm){
+      if(this.authService.authenticate(this.loginForm)){
+        this.router.navigate(['/home']);
+        this.loginForm.reset();
+      }
+      else {
+        this.invalidForm();
+      }
     }
   }
 
   ngOnInit(){
     
   }
+
+  async invalidForm() {
+    const alert = await this.alertController.create({
+      header: "Erro",
+      subHeader: 'Formulário Inválido',
+      message: 'Usuário inexistente',
+      buttons: ['OK']
+    })
+    await  alert.present();
+  }
+
 
 }
