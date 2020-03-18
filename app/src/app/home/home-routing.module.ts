@@ -27,6 +27,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'item/:id',
+        children:[
+          {
+            path:'',
+            loadChildren: () => import('../list-item/list-item.module').then(m => m.ListItemModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/home/profile',
         pathMatch: 'full'

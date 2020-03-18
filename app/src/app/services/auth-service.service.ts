@@ -39,7 +39,6 @@ export class AuthService {
     for(let i = 0; i < this.database.length; i++ ){
       if(this.database[i].email === email ){
         if(this.database[i].senha === password){
-          console.log('storage');
           this.storageUser(email, password);
           let user = new User();
           user.cpf = this.database[i].cpf;

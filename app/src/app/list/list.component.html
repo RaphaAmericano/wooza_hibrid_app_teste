@@ -18,7 +18,9 @@
       <ion-label>
         <h2>{{user.nome}}</h2>
       </ion-label>
-      <ion-button size="small">Info</ion-button>
+      <ion-button size="small">
+        <a color="light" [routerLink]="['/home/item/', i ]">Info</a>
+      </ion-button>
     </ion-item>
 
   </ion-list>

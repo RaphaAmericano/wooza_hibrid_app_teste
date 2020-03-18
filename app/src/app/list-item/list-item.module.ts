@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListComponent } from './list.component';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { ListItemComponent } from './list-item.component';
+
+
 
 @NgModule({
-  declarations: [ListComponent],
+  declarations: [ListItemComponent],
   imports: [
     IonicModule,
     CommonModule,
-    RouterModule.forChild([{path:'', component:ListComponent}])
+    RouterModule.forChild([{path:'', component:ListItemComponent}])
   ]
 })
-export class ListModule { }
+export class ListItemModule { }

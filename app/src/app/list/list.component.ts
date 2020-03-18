@@ -25,7 +25,6 @@ export class ListComponent implements OnInit {
         console.log(this.user);
     });
     this.list_users = this.auth.getDb();
-    console.log(this.list_users);
   }
 
   public logout(){
