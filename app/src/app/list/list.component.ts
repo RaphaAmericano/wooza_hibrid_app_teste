@@ -12,6 +12,8 @@ export class ListComponent implements OnInit {
 
   public user: User;
 
+  public list_users:User[] = [];
+
   constructor(
     private auth:AuthService, 
     private router: Router) { }
@@ -21,7 +23,9 @@ export class ListComponent implements OnInit {
       (res) => {
         this.user = res;
         console.log(this.user);
-    })
+    });
+    this.list_users = this.auth.getDb();
+    console.log(this.list_users);
   }
 
   public logout(){

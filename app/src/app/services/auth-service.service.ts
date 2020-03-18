@@ -63,7 +63,7 @@ export class AuthService {
 
   private async getStorageUser(){
     const res = await Storage.get({ key: 'user' });
-    const storage = Object.assign(new User ,JSON.parse(res.value)) ;
+    const storage = Object.assign(new User() ,JSON.parse(res.value)) ;
 
     for(let i = 0; i < this.database.length; i++){
       if(storage.email === this.database[i].email){

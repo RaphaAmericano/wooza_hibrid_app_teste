@@ -7,9 +7,20 @@
   </ion-header>
     
   <ion-list>
-    <ion-item>
-
+    <ion-list-header>
+      <ion-label>Usuários</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let user of list_users; let i = index">
+      <ion-avatar slot="start">
+        <img src="https://i.pravatar.cc/150?img={{i}}">
+      </ion-avatar>
+      
+      <ion-label>
+        <h2>{{user.nome}}</h2>
+      </ion-label>
+      <ion-button size="small">Info</ion-button>
     </ion-item>
+
   </ion-list>
 
   
