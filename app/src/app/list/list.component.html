@@ -16,7 +16,7 @@
       </ion-avatar>
       
       <ion-label>
-        <h2>{{user.nome}}</h2>
+        <h2>{{user.nome | titlecase}}</h2>
       </ion-label>
       <ion-button size="small">
         <a color="light" [routerLink]="['/home/item/', i ]">Info</a>

@@ -6,6 +6,8 @@ import { FormGroup } from '@angular/forms';
 import { Plugins } from '@capacitor/core';
 import { User } from '../models/user';
 import { Platform } from '@ionic/angular';
+import { StorageToken } from '../models/storage-token';
+
 
 const { Storage } = Plugins;
 @Injectable({
@@ -16,12 +18,18 @@ export class AuthService {
   private database = DATABASE.usuarios;
   public usuario: BehaviorSubject<User> = new BehaviorSubject(null);
 
-  constructor(private http: HttpClient, private platform: Platform) {
+  constructor( 
+    private platform: Platform) {
     this.platform.ready().then(
       () => {
-        this.getStorageUser()
+        this.getStorageUser().then(
+          (res) => {
+              this.usuario.next(res);
+            }
+        )
       }
     )
+    
   }
 
   public getUser() {
@@ -60,10 +68,9 @@ export class AuthService {
     })
   }
 
-  private async getStorageUser(){
-    const res = await Storage.get({ key: 'user' });
-    const storage = Object.assign(new User() ,JSON.parse(res.value)) ;
-
+  private searchInDB(user){
+    let storage = Object.assign(new StorageToken(), user);
+    console.log('search', storage, user);
     for(let i = 0; i < this.database.length; i++){
       if(storage.email === this.database[i].email){
         if(storage.senha === this.database[i].senha){
@@ -72,16 +79,23 @@ export class AuthService {
           user.dataNascimento = this.database[i].dataNascimento;
           user.email = this.database[i].email;
           user.nome = this.database[i].nome;
-          this.usuario.next(user);
+          // this.usuario.next(user);
+          console.log('loop get',user, i);
+          return user;
         }
       }
     }
+  }
 
+  private async getStorageUser(){
+    const res = await Storage.get({ key: 'user' });
+    const storage = await Object.assign(new User(), JSON.parse(res.value));
+    return storage;
   }
 
   private async removeStorageUser(){
     this.usuario = undefined;
-    await Storage.remove({ key: 'user' })
+    await Storage.remove({ key: 'user' });
   }
 
   public async clearStorageUser(){

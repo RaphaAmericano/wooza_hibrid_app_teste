@@ -16,7 +16,6 @@ export class NetworkService {
   public async getNetworkStatus() {
     const status = await Network.getStatus().then(
       async (res) => {
-        console.log(res);
         if(!res.connected){
           const alert = await this.alertCtrl.create(
             {

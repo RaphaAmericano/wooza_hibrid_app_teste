@@ -22,9 +22,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.auth.getUser().subscribe(
       (res) => {
-        this.usuario = res;
+        if(res != null ){
+          this.usuario = res;
+        } else {
+          this.router.navigate(['/'])
+        }
+        
       }
     );
+    
     this.net.getNetworkStatus();
     setInterval(() => {this.net.getNetworkStatus()}, 10000 )
   }
