@@ -40,7 +40,7 @@ export class AuthService {
     return this.database;
   }
 
-  public authenticate(form:FormGroup): boolean {
+  public authenticate(form:FormGroup): number | boolean{
     let email = form.get('email').value;
     let password = form.get('password').value;
     
@@ -53,8 +53,9 @@ export class AuthService {
           user.dataNascimento = this.database[i].dataNascimento;
           user.email = this.database[i].email;
           user.nome = this.database[i].nome;
+          user.id = i;
           this.usuario.next(user);
-          return true;
+          return i;
         } 
       }
     }

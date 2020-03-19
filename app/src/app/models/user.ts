@@ -5,5 +5,5 @@ export class User {
     cpf?: string;
     email: string;
     senha?: string;
-    id?:string;
+    id?:number;
 }

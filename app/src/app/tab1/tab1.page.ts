@@ -22,8 +22,9 @@ export class Tab1Page implements OnInit {
 
   public submitLogin(){
     if(this.loginForm){
-      if(this.authService.authenticate(this.loginForm)){
-        this.router.navigate(['/home']);
+      let auth = this.authService.authenticate(this.loginForm);
+      if(auth != false){
+        this.router.navigate(['home/item/', auth ]);
         this.loginForm.reset();
       }
       else {
