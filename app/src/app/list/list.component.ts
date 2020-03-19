@@ -22,15 +22,15 @@ export class ListComponent implements OnInit {
     this.auth.getUser().subscribe(
       (res) => {
         this.user = res;
-        console.log(this.user);
     });
     this.list_users = this.auth.getDb();
   }
 
   public logout(){
-    console.log('logout');
-    this.auth.clearStorageUser();
-    this.router.navigate(['/']);
+    this.auth.clearStorageUser().then(
+      () => this.router.navigate(['/'])
+    );
+    
   }
 
 }

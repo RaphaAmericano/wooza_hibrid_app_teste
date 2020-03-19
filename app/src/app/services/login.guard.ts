@@ -14,12 +14,19 @@ export class LoginGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log(state, next);
+    let is_auth:boolean = false;
 
-    //checar se o usuario corresponde 
-    
-
-    return true;
+    this.auth.isAuth().subscribe(
+      (res) => { 
+        is_auth = res;
+        console.log(res)
+        if(!is_auth) {
+          this.router.navigate(['/']);
+        }
+        
+      }
+    );
+    return is_auth; 
   }
 
   canActivateChild(
@@ -27,12 +34,15 @@ export class LoginGuard implements CanActivate, CanActivateChild, CanLoad {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     
     return true;
+
   }
   canLoad(
     route: Route,
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
+
     return true;
   }
+  
   
   
 }

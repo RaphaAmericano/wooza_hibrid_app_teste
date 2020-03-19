@@ -17,6 +17,7 @@ export class AuthService {
 
   private database = DATABASE.usuarios;
   public usuario: BehaviorSubject<User> = new BehaviorSubject(null);
+  public is_auth: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor( 
     private platform: Platform) {
@@ -24,6 +25,7 @@ export class AuthService {
       () => {
         this.getStorageUser().then(
           (res) => {
+              this.is_auth.next(true);
               this.usuario.next(res);
             }
         )
@@ -40,6 +42,10 @@ export class AuthService {
     return this.database;
   }
 
+  public isAuth(){
+    return this.is_auth;
+  }
+
   public authenticate(form:FormGroup): number | boolean{
     let email = form.get('email').value;
     let password = form.get('password').value;
@@ -54,6 +60,7 @@ export class AuthService {
           user.email = this.database[i].email;
           user.nome = this.database[i].nome;
           user.id = i;
+          this.is_auth.next(true);
           this.usuario.next(user);
           return i;
         } 
@@ -71,7 +78,6 @@ export class AuthService {
 
   private searchInDB(user){
     let storage = Object.assign(new StorageToken(), user);
-    console.log('search', storage, user);
     for(let i = 0; i < this.database.length; i++){
       if(storage.email === this.database[i].email){
         if(storage.senha === this.database[i].senha){
@@ -101,6 +107,7 @@ export class AuthService {
 
   public async clearStorageUser(){
     this.usuario.next(null);
+    this.is_auth.next(false);
     await Storage.clear();
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from '../models/user';
 import { AuthService } from '../services/auth-service.service';
 import { NavController } from '@ionic/angular';
@@ -13,8 +13,11 @@ export class ListItemComponent implements OnInit {
 
   public usuario:User = null;
 
-  constructor(private route: ActivatedRoute,
-    private auth:AuthService, private navCtrl: NavController) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private auth:AuthService, 
+    private navCtrl: NavController) { }
 
   ngOnInit() {
     let id = this.route.snapshot.params.id;
@@ -25,6 +28,12 @@ export class ListItemComponent implements OnInit {
 
   public returnLastPage(){
     this.navCtrl.back();
+  }
+
+  public logout(){
+    this.auth.clearStorageUser().then(
+      () => this.router.navigate(['/'])
+    );
   }
 
 }
