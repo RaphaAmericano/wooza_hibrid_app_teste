@@ -3,7 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { Observable } from 'rxjs';
 import { AuthService } from './auth-service.service';
 import { Route } from '@angular/compiler/src/core';
-
+import { map, catchError } from 'rxjs/operators';
+import { of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,27 +15,37 @@ export class LoginGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    let is_auth:boolean = false;
+    // this.auth.isAuth().subscribe(
+    //   (res) => { 
+    //     is_auth = res;
+    //     console.log(res)
+    //     if(is_auth) {
+    //       this.router.navigate(['/']);
+    //     }
+    //     return is_auth;     
+    //   }
+    // );
 
-    this.auth.isAuth().subscribe(
-      (res) => { 
-        is_auth = res;
-        console.log(res)
-        if(!is_auth) {
-          this.router.navigate(['/']);
-        }
-        
-      }
-    );
-    return is_auth; 
+    return this.auth.isAuth().pipe(
+     map(e => {
+       if(e){
+         return true;
+       }
+     }),
+     catchError(() => {
+      this.router.navigate(['/']);
+      return of(false);
+     }) 
+    ) 
+
   }
 
   canActivateChild(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    
+     
     return true;
-
+      
   }
   canLoad(
     route: Route,

@@ -7,12 +7,13 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate:[AuthGuard]
+    // canActivateChild:[AuthGuard]
   },
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canActivate:[LoginGuard]
+    // canActivate:[LoginGuard],
+    // canActivateChild:[LoginGuard]
   }
 ];
 @NgModule({

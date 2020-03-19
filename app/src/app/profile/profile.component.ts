@@ -23,9 +23,9 @@ export class ProfileComponent implements OnInit {
   }
 
   public logout(){
-    console.log('logout');
-    this.auth.clearStorageUser();
-    this.router.navigate(['/']);
+    this.auth.clearStorageUser().then(
+      () => this.router.navigate(['/'])
+    );
   }
 
 }

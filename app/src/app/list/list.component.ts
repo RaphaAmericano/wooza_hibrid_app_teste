@@ -30,7 +30,6 @@ export class ListComponent implements OnInit {
     this.auth.clearStorageUser().then(
       () => this.router.navigate(['/'])
     );
-    
   }
 
 }

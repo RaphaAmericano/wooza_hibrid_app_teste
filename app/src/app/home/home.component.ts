@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth-service.service';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { NetworkService } from '../services/network.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private auth:AuthService, 
     private router: Router,
-    private net:NetworkService
+    private net:NetworkService,
+    private platform:Platform
     ) { }
 
   ngOnInit() {
@@ -27,17 +29,18 @@ export class HomeComponent implements OnInit {
         } else {
           this.router.navigate(['/'])
         }
-        
       }
     );
-    
-    this.net.getNetworkStatus();
+    if(this.platform.is('ios') || this.platform.is('android')){
+      this.net.getNetworkStatus();
+    }
     setInterval(() => {this.net.getNetworkStatus()}, 10000 )
   }
 
   public logout(){
-    this.auth.clearStorageUser();
-    this.router.navigate(['/']);
+    this.auth.clearStorageUser().then(
+      () => this.router.navigate(['/'])
+    );
   }
 
 }

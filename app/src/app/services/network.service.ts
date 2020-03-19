@@ -13,6 +13,8 @@ export class NetworkService {
     private alertCtrl: AlertController, 
     private router: Router) { }
 
+  //Não consegui pegar a chava para o plugin do Native então usei esse do Capacitor
+
   public async getNetworkStatus() {
     const status = await Network.getStatus().then(
       async (res) => {
